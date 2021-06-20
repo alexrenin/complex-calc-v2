@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'complex-calc-v2';
+  title = 'Калькулятор инвестиций v2.0';
 }
