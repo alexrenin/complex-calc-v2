@@ -8,3 +8,30 @@
 .input-initial-amount {
 
 }
+.form-title {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(134, 134, 134, 0.07);
+
+    .btn-close {
+      visibility: visible;
+    }
+  }
+}
+.btn-close {
+  position: absolute;
+  right: 10px;
+
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+  visibility: hidden;
+
+  .btn-close-icon {
+    font-size: 20px;
+  }
+}

@@ -1,18 +1,34 @@
 <form class="form-container" >
+    <h2 class="form-title">
+        {{year}} год
+        <button class="btn-close" mat-icon-button aria-label="Close btn">
+            <mat-icon class="btn-close-icon">cancel</mat-icon>
+        </button>
+    </h2>
     <mat-form-field appearance="standard">
-        <mat-label>Первоначальная сумма</mat-label>
-        <input matInput type="text" inputmode="numeric">
+        <mat-label>Длительность, лет</mat-label>
+        <input
+            matInput
+            type="number"
+            (change)="onDurationChanged($event)"
+        >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Заработная плата</mat-label>
+        <input matInput type="text" inputmode="numeric" pattern="\d*">
     </mat-form-field>
     <mat-form-field appearance="standard">
         <mat-label>Ставка, % годовых</mat-label>
         <input matInput type="number">
     </mat-form-field>
     <mat-form-field appearance="standard">
-        <mat-label>Количество лет</mat-label>
-        <input matInput type="number" min="0">
+        <mat-label>% в инвестиции</mat-label>
+        <input matInput type="number">
     </mat-form-field>
-    <mat-form-field appearance="standard">
-        <mat-label>Ежемесячное пополнение</mat-label>
-        <input matInput type="text" inputmode="numeric">
-    </mat-form-field>
+    <p>
+        На расходы: 123
+    </p>
+    <p>
+        На инвестиции: 1234
+    </p>
 </form>
