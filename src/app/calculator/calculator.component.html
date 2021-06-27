@@ -7,7 +7,12 @@
         <p class="result" >Итого:</p>
     </div>
     <div class="tabs-container">
-        <app-form (onChange)="onFormChange($event)"></app-form>
+        <app-form
+                *ngFor=" let periodItem of periods"
+                [period]="periodItem"
+                (onChange)="onFormChange($event)"
+        >
+        </app-form>
         <button class="btn-add" mat-icon-button aria-label="Add btn">
             <mat-icon class="btn-add-icon">add_circle</mat-icon>
         </button>

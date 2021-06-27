@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+
+import { PeriodForm } from '../calculator/calculator.component';
 
 @Component({
   selector: 'app-form',
@@ -6,7 +8,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  year = 1;
+
+  @Input() period!: PeriodForm
 
   @Output() onChange = new EventEmitter<string>();
 
