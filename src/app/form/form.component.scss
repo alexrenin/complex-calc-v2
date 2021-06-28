@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 15px;
 }
 .input-initial-amount {
 
@@ -21,6 +22,9 @@
       visibility: visible;
     }
   }
+}
+.no-btn-close {
+  display: none;
 }
 .btn-close {
   position: absolute;
