@@ -1,7 +1,14 @@
-<form class="form-container" >
+<form class="form-container" novalidate>
     <h2 class="form-title">
-        {{period.duration}} год
-        <button class="btn-close" mat-icon-button aria-label="Close btn">
+        Период
+        <!--{{period.duration}} год-->
+        <button
+                class="btn-close"
+                [ngClass]="{ 'no-btn-close': isNoCloseBtn }"
+                mat-icon-button
+                aria-label="Close btn"
+                (click)="onRemovePeriod.emit()"
+        >
             <mat-icon class="btn-close-icon">cancel</mat-icon>
         </button>
     </h2>
@@ -10,25 +17,49 @@
         <input
             matInput
             type="number"
-            (change)="onDurationChanged($event)"
+            name="duration"
+            [(ngModel)]="period.duration"
+            (ngModelChange)="modelChanged()"
         >
     </mat-form-field>
     <mat-form-field appearance="standard">
         <mat-label>Заработная плата</mat-label>
-        <input matInput type="text" inputmode="numeric" pattern="\d*">
+        <input
+                matInput
+                type="text"
+                inputmode="numeric"
+                name="totalIncome"
+                [ngModel]="period.totalIncome"
+                (input)="inputWithValidation($event)"
+        >
     </mat-form-field>
     <mat-form-field appearance="standard">
         <mat-label>Ставка, % годовых</mat-label>
-        <input matInput type="number">
+        <input
+                matInput
+                type="number"
+                name="annualPercentage"
+                [(ngModel)]="period.annualPercentage"
+                (ngModelChange)="modelChanged()"
+        >
     </mat-form-field>
     <mat-form-field appearance="standard">
         <mat-label>% в инвестиции</mat-label>
-        <input matInput type="number">
+        <input
+                matInput
+                type="number"
+                name="investmentPercentage"
+                [(ngModel)]="period.investmentPercentage"
+                (ngModelChange)="modelChanged()"
+        >
     </mat-form-field>
     <p>
-        На расходы: 123
+        На расходы: {{ expenses }}
     </p>
     <p>
-        На инвестиции: 1234
+        На инвестиции: {{ toInvest }}
+    </p>
+    <p>
+        Накопления к концу периода: {{ periodResult }}
     </p>
 </form>
