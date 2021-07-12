@@ -1,17 +1,31 @@
 <div>
-    <div class="initial-settings-container">
-        <mat-form-field appearance="standard">
-            <mat-label>Первоначальная сумма</mat-label>
-            <input
-                    matInput
-                    type="text"
-                    inputmode="numeric"
-                    [ngModel]="initAmount"
-                    (input)="inputWithValidation($event)"
-            >
-        </mat-form-field>
-        <p class="result" >Итого: {{ result[result.length - 1]?.str }}</p>
-        <p class="result" >Итого, 4% / 12: {{ result[result.length - 1]?.percent4str }}</p>
+    <div class="initial-settings-and-result-container">
+        <div class="initial-settings-container">
+            <mat-form-field class="initial-input" appearance="standard">
+                <mat-label>Первоначальная сумма</mat-label>
+                <input
+                        matInput
+                        type="text"
+                        inputmode="numeric"
+                        [ngModel]="initAmount"
+                        (input)="inputWithValidation($event)"
+                >
+            </mat-form-field>
+            <mat-form-field class="initial-input" appearance="standard">
+                <mat-label>Сейчас, лет</mat-label>
+                <input
+                        matInput
+                        type="number"
+                        [(ngModel)]="initAge"
+                        (ngModelChange)="onFormChange()"
+                >
+            </mat-form-field>
+        </div>
+        <div class="result-container">
+            <p class="result" >Итого: {{ result[result.length - 1]?.str }}</p>
+            <p class="result" >Итого, 4% / 12: {{ result[result.length - 1]?.percent4str }}</p>
+            <p class="result" >Будет лет: {{ result[result.length - 1]?.age }}</p>
+        </div>
     </div>
     <hr>
     <div class="tabs-container">
@@ -19,7 +33,7 @@
                 *ngFor=" let periodItem of periods; let ind = index"
                 [period]="periodItem"
                 [isNoCloseBtn]="periods.length < 2"
-                [periodResult]="result[ind].str"
+                [periodResult]="result[ind]"
                 (onChange)="onFormChange()"
                 (onRemovePeriod)="onRemovePeriod(ind)"
         >

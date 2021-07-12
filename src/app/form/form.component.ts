@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 
-import { IPeriodForm } from '../calculator/calculator.component';
+import { IPeriodForm, IResultItem } from '../calculator/calculator.component';
 
 @Component({
   selector: 'app-form',
@@ -11,7 +11,7 @@ export class FormComponent implements OnInit {
 
   @Input() period!: IPeriodForm;
   @Input() isNoCloseBtn!: boolean;
-  @Input() periodResult!: string;
+  @Input() periodResult!: IResultItem;
 
   @Output() onChange = new EventEmitter();
   @Output() onRemovePeriod = new EventEmitter();

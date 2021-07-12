@@ -4,6 +4,12 @@ export interface ICalcProps {
   yearNumber: number,
   monthIncome: number,
   startAmount: number,
+  startAge: number,
+}
+
+export interface ICalcPeriodRes {
+  amount: number,
+  age: number,
 }
 
 export function calcPeriod({
@@ -11,7 +17,8 @@ export function calcPeriod({
   yearNumber,
   monthIncome,
   startAmount,
-}: ICalcProps): number {
+  startAge,
+}: ICalcProps): ICalcPeriodRes {
   const periodNumPerYear = 12;
   const monthPercent = 1 + (yearPercent / 100) / periodNumPerYear;
   const numberOfMonth = yearNumber * periodNumPerYear;
@@ -31,5 +38,8 @@ export function calcPeriod({
 
   const roundedRes = Math.round(newRes);
 
-  return roundedRes;
+  return {
+    amount: roundedRes,
+    age: startAge + yearNumber,
+  };
 }
