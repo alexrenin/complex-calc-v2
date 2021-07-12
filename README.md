@@ -6,3 +6,8 @@ https://alexrenin.github.io/complex-calc-v2/
 
 * Angular
 * MaterialUI 
+
+
+## Deploy
+
+https://angular.io/guide/deployment#deploy-to-github-pages
