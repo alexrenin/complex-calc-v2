@@ -7,7 +7,7 @@
                 [ngClass]="{ 'no-btn-close': isNoCloseBtn }"
                 mat-icon-button
                 aria-label="Close btn"
-                (click)="onRemovePeriod.emit()"
+                (click)="onRemoveBtnClick()"
         >
             <mat-icon class="btn-close-icon">cancel</mat-icon>
         </button>
@@ -60,6 +60,12 @@
         На инвестиции: {{ toInvest }}
     </p>
     <p>
-        Накопления к концу периода: {{ periodResult }}
+        Накопления к концу периода: {{ periodResult.age }}
+    </p>
+    <p>
+        4% капитала / 12 к концу периода: {{ periodResult.percent4str }}
+    </p>
+    <p>
+        Лет, концу периода: {{ periodResult.age }}
     </p>
 </form>

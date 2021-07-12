@@ -13,6 +13,7 @@ export interface IPeriodForm {
 export interface IResultItem {
   str: string,
   percent4str: string,
+  age: number,
 }
 
 @Component({
@@ -25,12 +26,14 @@ export class CalculatorComponent implements OnInit {
   periods: IPeriodForm[] = [];
   initAmount: string = '0';
   result: IResultItem[] = [];
+  initAge: number = 18;
 
   constructor() {
     const storage = localStorage.getItem(LS_KEY)
     const {
       periods: periodsFromStorage,
       initAmount: initAmountFromStorage = '0',
+      initAge: initAgeFromStorage = 18,
     } = JSON.parse(storage || '{}');
     this.periods = periodsFromStorage|| [
       {
@@ -41,6 +44,7 @@ export class CalculatorComponent implements OnInit {
       },
     ]
     this.initAmount = initAmountFromStorage;
+    this.initAge = initAgeFromStorage;
     this.result = this.getCalcResult();
   }
 
@@ -54,6 +58,7 @@ export class CalculatorComponent implements OnInit {
       JSON.stringify({
         periods: this.periods,
         initAmount: this.initAmount,
+        initAge: this.initAge,
       }),
     );
   }
@@ -82,19 +87,21 @@ export class CalculatorComponent implements OnInit {
     this.initAmount = validatedValue;
     this.onFormChange();
   }
-  getCalcResult() {
+  getCalcResult(): IResultItem[]  {
     const newResult = this.periods
       .reduce(
         (
-          acc: number[],
+          acc,
           { duration, totalIncome, annualPercentage, investmentPercentage },
         ) => {
-          const lastAmount = acc[acc.length - 1]
+          const lastAmount = acc[acc.length - 1].amount;
+          const lastAge = acc[acc.length - 1].age;
           const periodCalcRes = calcPeriod({
             yearPercent: annualPercentage,
             yearNumber: duration,
             monthIncome: (+totalIncome.replace(/\D/g, "")) * investmentPercentage / 100,
             startAmount: lastAmount,
+            startAge: lastAge,
           });
 
           return [
@@ -102,14 +109,17 @@ export class CalculatorComponent implements OnInit {
             periodCalcRes,
           ];
         },
-        [+this.initAmount.replace(/\D/g, "")]
+        [{
+          amount: +this.initAmount.replace(/\D/g, ""),
+          age: +this.initAge,
+        }]
       )
       .slice(1)
-      .map((item) => {
-
+      .map(({ amount, age }) => {
         const transformedItem: IResultItem = {
-          str: item.toLocaleString(),
-          percent4str: Math.round(item * 0.04 / 12).toLocaleString(),
+          str: amount.toLocaleString(),
+          percent4str: Math.round(amount * 0.04 / 12).toLocaleString(),
+          age,
         }
 
         return transformedItem;
