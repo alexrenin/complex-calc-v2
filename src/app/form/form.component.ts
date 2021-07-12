@@ -47,4 +47,12 @@ export class FormComponent implements OnInit {
       .round(income * this.period.investmentPercentage / 100)
       .toLocaleString();
   }
+
+  onRemoveBtnClick() {
+    const isAgreeWithDelete = window.confirm('Вы действительно хотите удалить этот период?');
+
+    if (isAgreeWithDelete) {
+      this.onRemovePeriod.emit()
+    }
+  }
 }
